@@ -20,18 +20,18 @@ export default class Box extends Component {
 
         const box = this.props.match.params.id;
         const response = await api.get(`boxes/${box}`);
-        
+
         this.setState({ box: response.data });
     }
 
     subscribeToNewFiles = () => {
         const box = this.props.match.params;
-       // const io = socket("http://localhost:3333");
-const io = socket("https://uploadms-frontend.herokuapp.com");
+        // const io = socket("http://localhost:3333");
+        const io = socket("https://upload-banckend.herokuapp.com");
         io.emit('connectRoom', box);
 
         io.on('file', data => {
-            console.log("===> ",data);
+            console.log("===> ", data);
             this.setState({ box: { ...this.state.box, files: [data, ...this.state.box.files] } })
         });
     };

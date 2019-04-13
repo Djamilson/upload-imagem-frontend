@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://uploadms-frontend.herokuapp.com',
+    baseURL: 'https://upload-banckend.herokuapp.com',
 });
 
 export default api;
