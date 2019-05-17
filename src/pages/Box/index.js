@@ -76,13 +76,12 @@ export default class Box extends Component {
   // eslint-disable-next-line react/sort-comp
   subscribeToNewFiles = () => {
     const box = this.props.match.params.id;
-    const io = socket('http://localhost:3333');
+    const io = socket('http://localhost:3000');
     // const io = socket('https://upload-arquivos-backend.herokuapp.com');
     io.emit('connectRoom', box);
     // removendo o file
     io.on('id', (data) => {
-      console.log('================== Vou D E L E T E:', data);
-      this.setState({
+       this.setState({
         uploadedFiles: {
           ...this.state.uploadedFiles,
           files: [
