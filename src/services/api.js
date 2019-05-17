@@ -1,10 +1,20 @@
 import axios from 'axios';
 
-const api = axios.create({
-   // baseURL: 'https://upload-arquivos-backend.herokuapp.com',
-   // baseURL: 'upload-arquivos-backend.herokuapp.com',
+import { getToken } from './auth';
 
-    baseURL: 'http://localhost:3333',
+const api = axios.create({
+  // baseURL: 'https://upload-arquivos-backend.herokuapp.com',
+  // baseURL: 'upload-arquivos-backend.herokuapp.com',
+
+  baseURL: 'http://localhost:3000',
+});
+
+api.interceptors.request.use(async (config) => {
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export default api;
